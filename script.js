@@ -1,65 +1,20 @@
-const simpleInterest = document.querySelector('.simple-interest');
-const button = document.querySelector('.button');
-//const loading = document.querySelector('.loader');
-const results = document.querySelector('.results');
+function compute()
+{
+    var principal = document.getElementById("principal").value;
 
-function calculateResults(e) {
-	// ui elements
-	const principal = document.querySelector('#principal');
-	const rate = document.querySelector('#rate');
-	const time = document.querySelector('#time');
-	const monthlyPayment = document.querySelector('#payment');
-	const totalInterest = document.querySelector('#interest');
-	const totalAmount = document.querySelector('#total');
-	// formula variables
-	const p = parseFloat(principal.value);
-	const r = parseFloat(rate.value);
-	const t = parseFloat(time.value);
-	
-	// calculate total interest
-	const interest = (p*t*r/100);
-	// calculate monthly payment
-	const payment = ((interest + p) / (t * 12)).toFixed(2);
-	// calculate total amount paid
-	const total = (interest + p).toFixed(2);
-	
-	if (isFinite(payment)) {
-		totalInterest.innerHTML = '$' + (interest).toFixed(2);
-		monthlyPayment.innerHTML = '$' + payment;
-		totalAmount.innerHTML = '$' + total;
-		// hide loader
-		button.classList.remove('loading');
-		// show results
-		results.classList.remove('hide');
-	} else {
-		// show error
-		showError('Please check your numbers and try again.');
-		// hide loader
-		button.classList.remove('loading');
-	}
+    var rate= document.getElemenetById("rate").value;
+
+    var years = document.getElemenetById("years").value;
+
+    var interest = principal * years * rate /100;
+    
+    var year = new Date().getFullYear()+parseInt(years);
 }
+function updateRate() 
+{
+    var rateval = document.getElementById("rate").value;
+    document.getElementById("rate_val").innerText=rateval;
 
-function showError(error) {
-	// create error
-	const errorMessage = document.createElement('div');
-	const calculate = document.querySelector('#calculate');
-
-	errorMessage.className = 'error';
-	errorMessage.appendChild(document.createTextNode(error));
-	simpleInterest.insertBefore(errorMessage, calculate);
-	// clear error
-	setTimeout(clearError, 3000);
+    var interest =  document.getElementById("result").innerHTML="If you deposit "+principal+",\<br\>at an interest rate of "+rate+"%\<br\>You will receive an amount of "+amount+",\<br\>in the year "+year+"\<br\>";
 }
-
-function clearError() {
-	// remove error
-	document.querySelector('.error').remove();
-}
-
-button.addEventListener('click', (e) => {
-	console.log('Calculating...');
-	// show loader
-	button.classList.add('loading');
-	
-	// set timeout
-	setTimeout(calculateResults, 2000);
+  
